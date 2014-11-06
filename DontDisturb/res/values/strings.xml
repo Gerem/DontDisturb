@@ -4,5 +4,30 @@
     <string name="app_name">DontDisturb</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-
+	<string name="blocked">Blocked</string>
+	<string name="profiles">Profiles</string>
+	<string name="createProfile">Create Profile</string>
+	<string name="selectTime">Select Time</string>
+	<string name="selectTimeRange">Select Time Range</string>
+	<string name="profileName">Profile Name</string>
+	<string name="appColor">#1990B5</string>
+	<string name="provideProfileName">Please provide a Profile Name.</string>
+	<string name="noOptionToBlock">You have to select at least one option to block.</string>
+	<string name="rangeTimeError">Time Range have not to be the same.</string>
+	<string name="unwantedCallsMsg">Unwanted calls will be blocked here.</string>
+	<string name="profileHereMsg">Profiles will be here. Please add them</string>
+	<string name="profileHelp">To register a profile just select a Time Range, write the Profile Name, and check what you want to block.</string>
+	<string name="contact">Contacts</string>
+	<string name="delete">Delete</string>
+	<string name="modify">Modify</string>
+	<string name="profileSavedMsg">Profile saved successfully.</string>
+	<string name="profileModifiedMsg">Profile modifed successfully.</string>
+	<string name="addContact">Add Contact</string>
+	<string name="contactHereMsg">Calls and messages from numbers in this list will be blocked according Profile settings.</string>
+	<string name="fromRegCalls">From Calls</string>
+	<string name="fromTxtMsg">From Messages</string>
+	<string name="fromContacts">From Contacts</string>
+	<string name="manually">Add Manually</string>
+	<string name="addTo">Add to</string>
+	<string name="callDuration">Call duration</string>
 </resources>

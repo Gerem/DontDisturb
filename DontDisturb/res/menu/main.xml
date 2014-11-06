@@ -4,9 +4,9 @@
     tools:context="com.ricenbeans.dontdirturb.MainActivity" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never"/>
+        android:id="@+id/addProfile"
+        android:orderInCategory="100"        
+        android:icon="@drawable/ic_action_new"
+        app:showAsAction="always"/>
 
 </menu>
