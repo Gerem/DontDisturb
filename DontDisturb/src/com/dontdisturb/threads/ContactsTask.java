@@ -18,6 +18,7 @@ import android.provider.CallLog;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.PhoneLookup;
+import android.telephony.PhoneNumberUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -137,6 +138,7 @@ public class ContactsTask extends AsyncTask<String, Integer, String>{
 					if(Validations.validateIsNull(c.getName())) // Validating contacts without names
 						c.setName(c.getPhone());
 					
+					c.setPhone(PhoneNumberUtils.formatNumber(c.getPhone()));
 					contactDao.insert(c);
 				}
 					
@@ -169,7 +171,7 @@ public class ContactsTask extends AsyncTask<String, Integer, String>{
 	public List<Contact> getContactsList(Activity context){
 		List<Contact>contacts = new ArrayList<Contact>();
 		ContentResolver cr = context.getContentResolver();
-    	Cursor phones = cr.query(Phone.CONTENT_URI, null,null,null, null);
+    	Cursor phones = cr.query(Phone.CONTENT_URI, null,null,null, Phone.DISPLAY_NAME + " ASC");
         // use the cursor to access the contacts    
         while (phones.moveToNext()){ // Validating if has number
         	if (Integer.parseInt(phones.getString(phones.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))) > 0) {

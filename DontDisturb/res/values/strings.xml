@@ -30,4 +30,7 @@
 	<string name="manually">Add Manually</string>
 	<string name="addTo">Add to</string>
 	<string name="callDuration">Call duration</string>
+	<string name="cancelledBy">Cancelled by profile </string>
+	<string name="fBanner">ca-app-pub-5856956782212778/8713820750</string>
+	<string name="fullScreen">ca-app-pub-5856956782212778/1190553959</string>
 </resources>

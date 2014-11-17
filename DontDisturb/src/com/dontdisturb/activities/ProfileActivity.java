@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TimePicker;
 
 import com.dontdirturb.model.Profile;
@@ -23,6 +24,9 @@ import com.dontdisturb.dao.ProfileDao;
 import com.dontdisturb.types.BooleanType;
 import com.dontdisturb.utils.Constants;
 import com.dontdisturb.utils.DontDisturbUtils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.nmolina.utils.Utils;
 import com.nmolina.utils.Validations;
 import com.ricenbeans.dontdirturb.R;
@@ -35,6 +39,7 @@ public class ProfileActivity extends ActionBarActivity {
     private CheckBox blockCalls;
     private CheckBox blockSMS;
     private Profile profile;
+    private AdView adView;
     private int indModifyView = 0;
     protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -45,6 +50,18 @@ public class ProfileActivity extends ActionBarActivity {
 		blockSMS	 = (CheckBox)findViewById(R.id.blockSmsChk);
 		profileName	 = (EditText) findViewById(R.id.profileName);
 		configureListener();
+		
+		adView = new AdView(this);
+        adView.setAdUnitId(this.getString(R.string.fBanner));
+        adView.setAdSize(AdSize.BANNER);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        // el atributo android:id="@+id/mainLayout".
+        LinearLayout layout = (LinearLayout)findViewById(R.id.fBanner);
+
+        // Añadirle adView.
+        layout.addView(adView);
+        // Cargar adView con la solicitud de anuncio.
+        adView.loadAd(adRequest);
 		
 		Intent intent = getIntent();
 		this.profile = new Profile();
@@ -74,6 +91,7 @@ public class ProfileActivity extends ActionBarActivity {
 			if(blockSMS.isChecked())
 				profile.setBlockSMS(BooleanType.YES.getCode());
 			
+			profile.setBlockCalls(BooleanType.YES.getCode()); // provisional
 			ProfileDao profileDao = new ProfileDao(this);
 			if(BooleanType.NO.getCode() == indModifyView){
 				profileDao.insert(profile);
@@ -90,7 +108,7 @@ public class ProfileActivity extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.create_profile_menu, menu);
-		getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(getString(R.string.appColor))));
+		getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor(getString(R.string.appColor))));
 		return true;
 	}
 	@Override

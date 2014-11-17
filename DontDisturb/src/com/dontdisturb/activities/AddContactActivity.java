@@ -13,16 +13,22 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.dontdirturb.model.Contact;
 import com.dontdisturb.threads.ContactsTask;
 import com.dontdisturb.utils.Constants;
+import com.dontdisturb.utils.DontDisturbUtils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.nmolina.utils.Validations;
 import com.ricenbeans.dontdirturb.R;
 
 public class AddContactActivity extends ActionBarActivity {
 	private Contact contact;
 	private Button cancelButton;
+	private AdView adView;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contact_activity);	
@@ -34,7 +40,7 @@ public class AddContactActivity extends ActionBarActivity {
 			contact.setContactType(intent.getIntExtra(Constants.CONTACT_TYPE, 0));
 										
 			ContactsTask contactsTask = new ContactsTask(this, contact); // Getting Contacts from profile
-			contactsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null);
+			DontDisturbUtils.executeAsyncTask(contactsTask, null);
 		}
 		cancelButton.setOnClickListener(new OnClickListener() {
 			
@@ -43,6 +49,18 @@ public class AddContactActivity extends ActionBarActivity {
 				finish();
 			}
 		});
+		
+		adView = new AdView(this);
+        adView.setAdUnitId(this.getString(R.string.fBanner));
+        adView.setAdSize(AdSize.BANNER);
+        AdRequest adRequest = new AdRequest.Builder().build();
+     // el atributo android:id="@+id/mainLayout".
+        LinearLayout layout = (LinearLayout)findViewById(R.id.fBanner);
+        layout.setVisibility(View.GONE);
+        // Añadirle adView.
+        layout.addView(adView);
+        // Cargar adView con la solicitud de anuncio.
+        adView.loadAd(adRequest);
 	}
 	@Override	
 	public boolean onCreateOptionsMenu(Menu menu) {

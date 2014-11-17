@@ -14,11 +14,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.dontdirturb.model.Contact;
 import com.dontdisturb.threads.ContactsTask;
 import com.dontdisturb.types.ContactType;
 import com.dontdisturb.utils.Constants;
+import com.dontdisturb.utils.DontDisturbUtils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.nmolina.utils.Validations;
 import com.ricenbeans.dontdirturb.R;
 
@@ -31,6 +36,7 @@ public class ContactActivity extends ActionBarActivity {
 	private final int FROM_MAN = 3;
 	private Activity context;
 	private Button cancelButton, addButton;
+	private AdView adView;
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.contact_activity);
@@ -50,7 +56,19 @@ public class ContactActivity extends ActionBarActivity {
 			contact.setProfileFk(intent.getLongExtra(Constants.COLUMN_PROFILE_FK, 0));
 			contact.setContactType(ContactType.PROFILE.getCode());						
 			ContactsTask contactsTask = new ContactsTask(this, contact); // Getting Contacts from profile
-			contactsTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, null);
+			DontDisturbUtils.executeAsyncTask(contactsTask, null);
+			
+			adView = new AdView(this);
+	        adView.setAdUnitId(this.getString(R.string.fBanner));
+	        adView.setAdSize(AdSize.BANNER);
+	        AdRequest adRequest = new AdRequest.Builder().build();
+	     // el atributo android:id="@+id/mainLayout".
+	        LinearLayout layout = (LinearLayout)findViewById(R.id.fBanner);
+
+	        // Añadirle adView.
+	        layout.addView(adView);
+	        // Cargar adView con la solicitud de anuncio.
+	        adView.loadAd(adRequest);
 		}
 	}
 	
@@ -72,8 +90,7 @@ public class ContactActivity extends ActionBarActivity {
 		case R.id.addProfile:
 			 CharSequence options[] = new CharSequence[] {getString(R.string.fromRegCalls), 
 					 									  getString(R.string.fromContacts), 
-					 									  getString(R.string.fromTxtMsg),
-					 									  getString(R.string.manually)};
+					 									  getString(R.string.fromTxtMsg)};
 			 
 			AlertDialog.Builder builder = new AlertDialog.Builder(this);			
 			builder.setItems(options, new DialogInterface.OnClickListener() {

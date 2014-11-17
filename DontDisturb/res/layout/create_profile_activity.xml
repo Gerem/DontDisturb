@@ -11,6 +11,7 @@
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:layout_marginTop="5dp"
+        android:layout_weight="1"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -64,16 +65,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:hint="@string/profileName"
             android:capitalize="words"
+            android:hint="@string/profileName"
             android:singleLine="true" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" 
             android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp">
+            android:layout_marginRight="5dp"
+            android:orientation="horizontal" >
 
             <CheckBox
                 android:id="@+id/blockCallsChk"
@@ -81,7 +82,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_weight=".5"
-                android:text="Block Calls" />
+                android:checked="true"
+                android:text="Block Calls" 
+                android:visibility="gone"/>
 
             <CheckBox
                 android:id="@+id/blockSmsChk"
@@ -89,8 +92,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_weight=".5"
+                android:visibility="gone"                
                 android:text="Block SMS" />
         </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/fBanner"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical" >
     </LinearLayout>
 
 </LinearLayout>

@@ -12,7 +12,9 @@ import com.dontdisturb.utils.Constants;
 import com.dontdisturb.utils.GenericDao;
 import com.nmolina.utils.Utils;
 public class ProfileDao extends GenericDao{
+	// Database creation sql statement
 	
+		
 	public ProfileDao(Activity context){
 		super(context);
 	}
@@ -99,6 +101,7 @@ public class ProfileDao extends GenericDao{
 		profile.setRegistryDate(Utils.stringToDate(cursor.getString(4),  Utils.DATE_PATTERN));
 		profile.setBlockCalls(cursor.getInt(5));
 		profile.setBlockSMS(cursor.getInt(6));		
+				
 		return profile;
 	}
 }

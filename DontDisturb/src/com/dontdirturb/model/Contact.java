@@ -25,6 +25,7 @@ public class Contact implements Serializable{
 	private String callDuration;
 	private String callTime;
 	private String msg;
+	private Profile profile;
 	public String getName() {
 		return name;
 	}
@@ -99,6 +100,12 @@ public class Contact implements Serializable{
 	}
 	public String getMsg() {
 		return msg;
+	}
+	public Profile getProfile() {
+		return profile;
+	}
+	public void setProfile(Profile profile) {
+		this.profile = profile;
 	}
 	public void setMsg(String msg) {
 		this.msg = msg;
